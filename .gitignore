@@ -1,0 +1,11 @@
+.project/target
+.project/project
+.idea
+.bsp
+**/*.iml
+**/target
+target/
+.settings
+.classpath
+.cache-main
+.cache-tests

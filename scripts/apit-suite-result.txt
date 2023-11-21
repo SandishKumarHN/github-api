@@ -1,0 +1,81 @@
+-n test-01-01: healthcheck =
+curl -s -o /dev/null -w '%{http_code}' http://localhost:8090/healthcheck
+-n (15 seconds)
+pass
+-n test-02-01: / key count =
+pass
+-n test-02-02: / repository_search_url value =
+pass
+-n test-02-03: / organization_repositories_url value =
+pass
+-n test-03-01: /orgs/Netflix/ key count =
+pass
+-n test-03-02: /orgs/Netflix avatar_url =
+pass
+-n test-03-03: /orgs/Netflix location =
+pass
+-n test-04-01: /orgs/Netflix/members object count =
+failed
+  expected=28..32
+  response=32
+-n test-04-02: /orgs/Netflix/members login first alpha case-insensitive =
+pass
+-n test-04-03: /orgs/Netflix/members login first alpha case-sensitive =
+pass
+-n test-04-04: /orgs/Netflix/members login last alpha case-insensitive =
+pass
+-n test-04-05: /orgs/Netflix/members id first =
+pass
+-n test-04-06: /orgs/Netflix/members id last =
+pass
+-n test-04-07: /users/amirziai/orgs proxy =
+pass
+-n test-04-08: /users/xuorig/orgs proxy =
+pass
+-n test-05-01: /orgs/Netflix/repos object count =
+pass
+-n test-05-02: /orgs/Netflix/repos full_name first alpha case-insensitive =
+pass
+-n test-05-03: /orgs/Netflix/members full_name first alpha case-sensitive =
+pass
+-n test-05-04: /orgs/Netflix/members login last alpha case-insensitive =
+pass
+-n test-05-05: /orgs/Netflix/repos id first =
+pass
+-n test-05-06: /orgs/Netflix/repos id last =
+pass
+-n test-05-07: /orgs/Netflix/repos languages unique =
+pass
+-n test-06-01: /view/bottom/5/forks =
+failed
+  expected=[["Netflix/octodns",0],["Netflix/octodns-ns1",0],["Netflix/octodns-route53",0],["Netflix/octodns-ultra",0],["Netflix/virtual-kubelet",0]]
+  response=[["Netflix/apache-pyiceberg",0],["Netflix/eclipse-mat",0],["Netflix/iceberg-python",0],["Netflix/mantis-helm",0],["Netflix/octodns",0]]
+-n test-06-02: /view/bottom/10/forks =
+failed
+  expected=[["Netflix/nflx-geofeed",1],["Netflix/apache-pyiceberg",0],["Netflix/eclipse-mat",0],["Netflix/iceberg-python",0],["Netflix/mantis-helm",0],["Netflix/octodns",0],["Netflix/octodns-ns1",0],["Netflix/octodns-route53",0],["Netflix/octodns-ultra",0],["Netflix/virtual-kubelet",0]]
+  response=[["Netflix/apache-pyiceberg",0],["Netflix/eclipse-mat",0],["Netflix/iceberg-python",0],["Netflix/mantis-helm",0],["Netflix/octodns",0],["Netflix/octodns-ns1",0],["Netflix/octodns-route53",0],["Netflix/octodns-ultra",0],["Netflix/virtual-kubelet",0],["Netflix/e2nest",1]]
+-n test-06-03: /view/bottom/5/last_updated =
+failed
+  expected=[["Netflix/mantis-source-jobs","2022-03-29T16:25:56Z"],["Netflix/netflixoss-npm-build-infrastructure","2022-03-29T16:24:54Z"],["Netflix/mantis-api","2022-03-22T21:52:15Z"],["Netflix/eclipse-mat","2022-01-19T19:58:04Z"],["Netflix/mantis-rxnetty","2021-08-10T20:08:55Z"]]
+  response=[["Netflix/mantis-rxnetty","2021-08-10T20:08:55Z"],["Netflix/eclipse-mat","2022-01-19T19:58:04Z"],["Netflix/netflixoss-npm-build-infrastructure","2022-03-29T16:24:54Z"],["Netflix/mantis-source-jobs","2022-03-29T16:25:56Z"],["Netflix/mantis-connectors","2022-03-29T16:26:01Z"]]
+-n test-06-04: /view/bottom/10/last_updated =
+failed
+  expected=[["Netflix/iep-shadow","2022-03-29T16:27:36Z"],["Netflix/ember-batch-request","2022-03-29T16:27:14Z"],["Netflix/falcor-datasource-chainer","2022-03-29T16:26:27Z"],["Netflix/mantis-examples","2022-03-29T16:26:03Z"],["Netflix/mantis-connectors","2022-03-29T16:26:01Z"],["Netflix/mantis-source-jobs","2022-03-29T16:25:56Z"],["Netflix/netflixoss-npm-build-infrastructure","2022-03-29T16:24:54Z"],["Netflix/mantis-api","2022-03-22T21:52:15Z"],["Netflix/eclipse-mat","2022-01-19T19:58:04Z"],["Netflix/mantis-rxnetty","2021-08-10T20:08:55Z"]]
+  response=[["Netflix/mantis-rxnetty","2021-08-10T20:08:55Z"],["Netflix/eclipse-mat","2022-01-19T19:58:04Z"],["Netflix/netflixoss-npm-build-infrastructure","2022-03-29T16:24:54Z"],["Netflix/mantis-source-jobs","2022-03-29T16:25:56Z"],["Netflix/mantis-connectors","2022-03-29T16:26:01Z"],["Netflix/mantis-examples","2022-03-29T16:26:03Z"],["Netflix/falcor-datasource-chainer","2022-03-29T16:26:27Z"],["Netflix/ember-batch-request","2022-03-29T16:27:14Z"],["Netflix/iep-shadow","2022-03-29T16:27:36Z"],["Netflix/falcor-hapi","2022-03-29T16:27:56Z"]]
+-n test-06-05: /view/bottom/5/open_issues =
+failed
+  expected=[["Netflix/titus-kube-common",0],["Netflix/tslint-config-netflix",0],["Netflix/user2020-metaflow-tutorial",0],["Netflix/virtual-kubelet",0],["Netflix/webpack-parse-query",0]]
+  response=[["Netflix/.github",0],["Netflix/aegisthus",0],["Netflix/apache-pyiceberg",0],["Netflix/awsobjectmapper",0],["Netflix/bbparse",0]]
+-n test-06-06: /view/bottom/10/open_issues =
+failed
+  expected=[["Netflix/techreports",0],["Netflix/titus",0],["Netflix/titus-api-definitions",0],["Netflix/titus-control-plane",0],["Netflix/titus-executor",0],["Netflix/titus-kube-common",0],["Netflix/tslint-config-netflix",0],["Netflix/user2020-metaflow-tutorial",0],["Netflix/virtual-kubelet",0],["Netflix/webpack-parse-query",0]]
+  response=[["Netflix/.github",0],["Netflix/aegisthus",0],["Netflix/apache-pyiceberg",0],["Netflix/awsobjectmapper",0],["Netflix/bbparse",0],["Netflix/blesk",0],["Netflix/codec_compare",0],["Netflix/derand",0],["Netflix/e2nest",0],["Netflix/eclipse-jifa",0]]
+-n test-06-07: /view/bottom/5/stars =
+failed
+  expected=[["Netflix/dgs-examples-kotlin-2.7",0],["Netflix/iceberg-python",0],["Netflix/octodns-ns1",0],["Netflix/octodns-route53",0],["Netflix/virtual-kubelet",0]]
+  response=[["Netflix/octodns-ns1",0],["Netflix/octodns-route53",0],["Netflix/virtual-kubelet",0],["Netflix/apache-pyiceberg",1],["Netflix/conductor-docs",1]]
+-n test-06-08: /view/bottom/10/stars =
+failed
+  expected=[["Netflix/conductor-docs",1],["Netflix/dgs-examples-java.latest",1],["Netflix/eclipse-mat",1],["Netflix/octodns",1],["Netflix/octodns-ultra",1],["Netflix/dgs-examples-kotlin-2.7",0],["Netflix/iceberg-python",0],["Netflix/octodns-ns1",0],["Netflix/octodns-route53",0],["Netflix/virtual-kubelet",0]]
+  response=[["Netflix/octodns-ns1",0],["Netflix/octodns-route53",0],["Netflix/virtual-kubelet",0],["Netflix/apache-pyiceberg",1],["Netflix/conductor-docs",1],["Netflix/dgs-examples-java.latest",1],["Netflix/dgs-examples-kotlin-2.7",1],["Netflix/eclipse-mat",1],["Netflix/iceberg-python",1],["Netflix/octodns",1]]
+21/30 (70.00%) tests passed
