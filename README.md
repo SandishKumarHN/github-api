@@ -15,11 +15,12 @@ The GitHub API Cache Service is implemented in Scala using Akka HTTP. It serves 
 
 To use the GitHub API Cache Service, follow these steps:
 
-1. Ensure you have Scala(2.13.12) and SBT installed(1.9.7).
+1. Ensure you have Scala(2.13.12), Java(17.0.6) and SBT installed(1.9.7).
 2. export GITHUB_API_TOKEN to your [Github API token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
 3. Clone the repository: `git clone https://github.com/SandishKumarHN/github-api.git`
 4. Navigate to the project directory: `cd github-api`
-5. Run the service: `sh scripts/run.sh`
+5. Run the build with tests : `sh scripts/build.sh`
+6. Run the service: `sh scripts/run.sh 8071`
 
 ### API Endpoints
 
@@ -117,9 +118,9 @@ The service is configurable through the `application.conf` file. Adjust the conf
   - Embedded Databases (DuckDB, SQLite):
     - Lightweight and can be embedded within the application.
     - Considerable for experimentation but might be suboptimal for frequent upserts and reads.
-  - TreeMap 
+  - TrieMap 
     - Thread-safe and lightweight implementation.
     - Provides efficient in-memory storage for caching aggregated views.
   - Choice
-    - I chose TreeMap for its thread safety, lightweight nature, and efficiency in in-memory storage.
+    - I chose TrieMap for its thread safety, lightweight nature, and efficiency in in-memory storage.
     - It simplifies our implementation, providing a good balance between performance and simplicity.

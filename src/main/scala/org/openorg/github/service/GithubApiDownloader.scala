@@ -21,17 +21,17 @@ class GithubApiDownloader(requestHandler: GithubApiUtils) extends LazyLogging {
       case 200 =>
         val responseBody = EntityUtils.toString(response.getEntity)
         addToCache(url, pageUrl, responseBody)
-        logger.info(s"Crawling pages, url: ${url}, cached pages : ${pageResponseCache.get(url).size}")
+        logger.info(s"Crawling pages, url: ${pageUrl}, cached endpoints : ${pageResponseCache.size}")
         val nextPageUrl = getNextPageUrl(response)
         nextPageUrl match {
           case Some(nextUrl) if !pageResponseCache.contains(nextUrl) =>
             fetchAllPages(url, nextUrl, requestHandler.sendRequest(nextUrl))
           case _ =>
-            logger.info(s"Crawling pages, No more pages. total pages: ${pageResponseCache.get(url).size}")
+            logger.info(s"Crawling pages, No more pages. total endpoints: ${pageResponseCache.size}")
         }
 
       case _ =>
-        logger.info(s"Failed to fetch data from $url. HTTP status code: ${response.getStatusLine.getStatusCode}")
+        logger.info(s"Failed to fetch data from $pageUrl. HTTP status code: ${response.getStatusLine.getStatusCode}")
     }
   }
 

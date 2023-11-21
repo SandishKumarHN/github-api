@@ -1,1 +1,1 @@
-sbt run
+sbt "run $1"

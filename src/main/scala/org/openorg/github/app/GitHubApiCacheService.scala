@@ -26,7 +26,6 @@ class GitHubApiCacheService(config: Config) extends LazyLogging {
   val requestHandler = new GithubApiUtils(config)
   val requestDetails = requestHandler.requestDetails()
   val apiUrl = requestDetails.apiUrl
-  val orgName = requestDetails.org
 
   // Cache service to store the responses
   val cacheService = new GithubApiDownloader(requestHandler)
@@ -105,7 +104,7 @@ class GitHubApiCacheService(config: Config) extends LazyLogging {
         get {
           val endpoint = segments.mkString("/")
           val fullUrl = s"$apiUrl$endpoint"
-          logger.info(s"Retrieve cached response or else send Github Api, ${fullUrl}")
+          logger.info(s"Retrieve cached response or send Github API request, ${fullUrl}")
           complete(retrieveOrCacheEndpoint(fullUrl))
         }
     }
@@ -179,6 +178,7 @@ class GitHubApiCacheService(config: Config) extends LazyLogging {
         entity = HttpEntity(ContentTypes.`application/json`, jsonString)
       )
     } else {
+      logger.info(s"Direct request to Github API server, ${endpoint}")
       val response: CloseableHttpResponse = requestHandler.sendRequest(endpoint)
       val statusCode = response.getStatusLine.getStatusCode
       val entity = EntityUtils.toString(response.getEntity)
